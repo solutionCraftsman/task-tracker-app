@@ -43,12 +43,7 @@ function App() {
     }
 
     // Add Task
-    // const addTask = (task) => {
     const addTask = async (task) => {
-        //console.log(task)
-        /*const id = Math.floor(Math.random() * 10000) +1
-        const newTask = { id, ...task }
-        setTasks([...tasks, newTask])*/
 
         const res = await fetch('http://localhost:5000/tasks', {
             method: 'POST',
@@ -60,7 +55,7 @@ function App() {
 
         console.log(res)
 
-        const data = await res.json() //you always await a promise
+        const data = await res.json()
 
         console.log(data)
 
@@ -68,15 +63,12 @@ function App() {
     }
 
     // Delete Task
-    // const deleteTask = (id) => {
     const deleteTask = async (id) => {
         const res = await fetch(`http://localhost:5000/tasks/${id}`, {
             method: 'DELETE'
         })
         console.log(res)
         console.log(await res.json())
-        //if res.status === 200, then setTasks() ... filter ...
-        //console.log('delete', id)
         setTasks(tasks.filter
             (task => task.id !== id)
         )
@@ -99,13 +91,6 @@ function App() {
 
         const data = await res.json()
 
-        /*setTasks(tasks.map
-            (task => task.id === id ?
-                { ...task, reminder: !task.reminder} :
-                task
-            )
-        )*/
-
         setTasks(tasks.map
             (task => task.id === id ?
                 { ...task, reminder: data.reminder} :
@@ -117,11 +102,7 @@ function App() {
     return (
         <Router>
             <div className="container">
-                {/*<Header title='Hello' />*/}
                 <Header onAddBtnClick={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
-                {/*{showAddTask && <AddTask onAdd={addTask} />}*/}
-                {/*<Tasks tasks={tasks} onDelete={deleteTask}*/}
-                {/*onToggle={toggleReminder}/>*/}
                 <Route path='/' exact render={
                     (props) => (
                         <>
@@ -135,18 +116,5 @@ function App() {
         </Router>
     );
 }
-
-//Class based component
-/*import React from 'react'
-class App extends React.Component {
-    render() {
-        return (
-            //<h1>Hello from a class</h1>
-            <div className="container">
-                <Header />
-            </div>
-        )
-    }
-}*/
 
 export default App;

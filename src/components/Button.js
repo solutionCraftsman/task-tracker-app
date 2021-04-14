@@ -2,17 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 const Button = ({ color, text, onClick }) => {
-    /*const onClick = () => {
-        console.log('click')
-    }*/
-
-    //passing in the event object
-    /*const onClick = (e) => {
-        console.log(e)
-    }*/
 
     return (
-        // <button className='btn'>Add</button>
         <button
             onClick={onClick}
             style={{
